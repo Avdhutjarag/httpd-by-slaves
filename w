@@ -1,4 +1,4 @@
-sn d
+sqsn d
 fe
 vdsv
 af
