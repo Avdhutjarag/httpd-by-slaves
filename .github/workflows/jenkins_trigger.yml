@@ -1,18 +1,20 @@
-name: Trigger Jenkins Build
+name: Trigger Jenkins Job
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name parameter for Jenkins job'
+        required: true
 
 jobs:
-  trigger_jenkins:
+  trigger-jenkins:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Jenkins
-        run: |
-          curl -X POST http://3.109.212.35:8080/jenkins/job/dw/buildWithParameters \
-            --user avdhut:1156f4ab33d7480583339656edeb807331 \
-            --data-urlencode "PARAMETER_NAME=value1" \
-            --data-urlencode "ANOTHER_PARAMETER=value2"
+      - name: Trigger Jenkins Job
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: trigger-jenkins
+          client-payload: '{"name": "${{ github.event.inputs.name }}" }'
