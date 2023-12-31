@@ -5,6 +5,3 @@ afbs
 sqsdw
 g
 Kva
-vdgt
-nvbv
-vv
