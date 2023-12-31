@@ -17,4 +17,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           event-type: trigger-jenkins
-          client-payload: '{"name": "${{ github.event.inputs.name }}" }'
+          client-payload: '{"name": "avdhut" }'  # Hardcoded value for 'name'
