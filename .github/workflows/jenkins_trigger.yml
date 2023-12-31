@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Trigger Jenkins
         run: |
-          curl -X POST http://3.109.212.35:8080/jenkins/job/webhook/buildWithParameters \
+          curl -X POST http://3.109.212.35:8080/jenkins/job/dw/buildWithParameters \
             --user avdhut:1156f4ab33d7480583339656edeb807331 \
             --data-urlencode "PARAMETER_NAME=value1" \
             --data-urlencode "ANOTHER_PARAMETER=value2"
