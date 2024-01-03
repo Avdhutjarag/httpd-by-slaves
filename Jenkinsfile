@@ -6,11 +6,12 @@ pipeline {
                 script {
                     // Use 'node' to provide the necessary context
                     node {
-                        // Checkout the Git repository to get the variables.groovy file
+                        // Checkout the Git repository to get the Jenkinsfile
                         checkout scm
 
-                        // Load the variables from the external file using readFile
-                        def variables = evaluate(new File("${env.WORKSPACE}/variables.groovy").text)
+                        // Read the variables from the external file using readFile
+                        def variablesContent = readFile('variables.groovy')
+                        def variables = evaluate(variablesContent)
 
                         // Now you can use the variables in subsequent steps
                         echo "Variable 1: ${variables?.variable1}"
