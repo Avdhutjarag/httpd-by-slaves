@@ -1,6 +1,11 @@
 pipeline {
     agent any
     
+    environment {
+        // Define environment variables here
+        VARIABLE_1 = ''
+    }
+
     stages {
         stage('Checkout SCM') {
             steps {
@@ -18,9 +23,7 @@ pipeline {
                     echo "Variable 1: ${variable1}"
 
                     // Set variable1 as an environment variable
-                    withEnv(["VARIABLE_1=${variable1}"]) {
-                        echo "Variable 1 assigned and set as environment variable"
-                    }
+                    env.VARIABLE_1 = variable1
                 }
             }
         }
