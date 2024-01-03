@@ -24,6 +24,9 @@ pipeline {
 
                     // Set variable1 as an environment variable
                     env.VARIABLE_1 = variable1
+
+                    // Return variable1 for use in the next stage
+                    return variable1
                 }
             }
         }
