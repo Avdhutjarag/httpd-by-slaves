@@ -1,11 +1,8 @@
+def variables // Declare variables at the top level
+
 pipeline {
     agent any
     
-    environment {
-        // Define environment variables here
-        VARIABLE_1 = ''
-    }
-
     stages {
         stage('Checkout SCM') {
             steps {
@@ -16,27 +13,51 @@ pipeline {
         stage('Load Variables') {
             steps {
                 script {
-                    // Assign a value to variable1
-                    def variable1 = "This is the value of variable1"
+                    try {
+                        // Load variables only if not already loaded
+                        if (!variables) {
+                            def variablesContent = readFile('variables.groovy')
+                            echo "Loaded Variables Content: ${variablesContent}"
 
-                    // Debug print
-                    echo "Variable 1: ${variable1}"
+                            variables = evaluate(variablesContent)
+                            echo "Loaded Variables: ${variables}"
+                        }
 
-                    // Set variable1 as an environment variable
-                    env.VARIABLE_1 = variable1
-
-                    // Return variable1 for use in the next stage
-                    return variable1
+                        echo "Variable 1: ${variables.variable1}"
+                        echo "Variable 2: ${variables.variable2}"
+                        echo "Variable 3: ${variables.variable3}"
+                    } catch (Exception e) {
+                        echo "Error loading variables: ${e.message}"
+                        currentBuild.result = 'FAILURE'
+                        error "Failed to load variables"
+                    }
                 }
             }
         }
 
-        stage('Next Stage') {
+        stage('Use Variables in Stage 1') {
             steps {
                 script {
-                    // Access the environment variable
-                    def valueOfVariable1 = env.VARIABLE_1
-                    echo "Value of Variable 1 in the next stage: ${valueOfVariable1}"
+                    echo "Using Variable 1 in Stage 1: ${variables.variable1}"
+                    // Perform actions using variables in this stage
+                }
+            }
+        }
+
+        stage('Use Variables in Stage 2') {
+            steps {
+                script {
+                    echo "Using Variable 2 in Stage 2: ${variables.variable2}"
+                    // Perform actions using variables in this stage
+                }
+            }
+        }
+
+        stage('Use Variables in Stage 3') {
+            steps {
+                script {
+                    echo "Using Variable 3 in Stage 3: ${variables.variable3}"
+                    // Perform actions using variables in this stage
                 }
             }
         }
