@@ -9,9 +9,8 @@ pipeline {
                         // Checkout the Git repository to get the variables.groovy file
                         checkout scm
 
-                        // Load the variables from the external file using evaluate
-                        def variables = null
-                        evaluate(new File("${env.WORKSPACE}/variables.groovy").text, variables)
+                        // Load the variables from the external file using readFile
+                        def variables = evaluate(new File("${env.WORKSPACE}/variables.groovy").text)
 
                         // Now you can use the variables in subsequent steps
                         echo "Variable 1: ${variables?.variable1}"
