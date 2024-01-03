@@ -6,8 +6,11 @@ pipeline {
                 script {
                     // Use 'node' to provide the necessary context
                     node {
+                        // Checkout the Git repository to get the variables.groovy file
+                        checkout scm
+
                         // Load the variables from the external file
-                        def myStringVariable = load 'variables.groovy'
+                        def myStringVariable = readFile('variables.groovy').trim()
 
                         // Now you can use the variable in subsequent steps
                         echo "My string variable: ${myStringVariable}"
