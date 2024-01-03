@@ -27,11 +27,6 @@ pipeline {
 
         // Add more stages as needed...
 
-        stage('Your Next Stage') {
-            steps {
-                // Your existing or additional steps
-            }
-        }
     }
     
     post {
