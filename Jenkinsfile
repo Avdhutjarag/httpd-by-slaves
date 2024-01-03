@@ -16,7 +16,7 @@ pipeline {
                         echo "Variable 1: ${variables.variable1}"
                         echo "Variable 2: ${variables.variable2}"
                         echo "Variable 3: ${variables.variable3}"
-                        echo "Variable 4: ${variables.variable4.join(', ')}"
+                       // echo "Variable 4: ${variables.variable4.join(', ')}"
                         
                         // You can use the variables in shell commands or other steps
                         sh "echo ${variables.variable1}"
