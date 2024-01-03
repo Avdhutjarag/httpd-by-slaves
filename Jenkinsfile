@@ -1,7 +1,3 @@
-def variablesContent = readFile('variables.groovy')
-def variables = evaluate(variablesContent)
-
-
 pipeline {
     agent any
     
@@ -15,16 +11,26 @@ pipeline {
         stage('Load Variables') {
             steps {
                 script {
-                    // Debug prints
-                    //def variablesContent = readFile('variables.groovy')
-                    echo "Loaded Variables Content: ${variablesContent}"
+                    // Assign a value to variable1
+                    def variable1 = "This is the value of variable1"
 
-                 //   def variables = evaluate(variablesContent)
-                    echo "Loaded Variables: ${variables}"
+                    // Debug print
+                    echo "Variable 1: ${variable1}"
 
-                    echo "Variable 1: ${variables.variable1}"
-                    echo "Variable 2: ${variables.variable2}"
-                    echo "Variable 3: ${variables.variable3}"
+                    // Set variable1 as an environment variable
+                    withEnv(["VARIABLE_1=${variable1}"]) {
+                        echo "Variable 1 assigned and set as environment variable"
+                    }
+                }
+            }
+        }
+
+        stage('Next Stage') {
+            steps {
+                script {
+                    // Access the environment variable
+                    def valueOfVariable1 = env.VARIABLE_1
+                    echo "Value of Variable 1 in the next stage: ${valueOfVariable1}"
                 }
             }
         }
