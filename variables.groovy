@@ -1,7 +1,7 @@
 // variables.groovy
 
 return [
-    variable1: 'value1',
-    variable2: 'value2',
-    variable3: 'value3'
+    variable1: 'avdhut',
+    variable2: 'jarag',
+    variable3: 'mhasave'
 ]
