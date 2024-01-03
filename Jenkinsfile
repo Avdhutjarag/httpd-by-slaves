@@ -1,3 +1,7 @@
+def variablesContent = readFile('variables.groovy')
+def variables = evaluate(variablesContent)
+
+
 pipeline {
     agent any
     
@@ -12,10 +16,10 @@ pipeline {
             steps {
                 script {
                     // Debug prints
-                    def variablesContent = readFile('variables.groovy')
+                    //def variablesContent = readFile('variables.groovy')
                     echo "Loaded Variables Content: ${variablesContent}"
 
-                    def variables = evaluate(variablesContent)
+                 //   def variables = evaluate(variablesContent)
                     echo "Loaded Variables: ${variables}"
 
                     echo "Variable 1: ${variables.variable1}"
