@@ -1,5 +1,7 @@
 // variables.groovy
-variable1 = "hello"
-variable2 = "world"
-variable3 = 42
-variable4 = ["apple", "banana", "orange"]
+return [
+    variable1: 'some value',
+    variable2: 42,
+    variable3: true,
+    variable4: ['item1', 'item2', 'item3']
+]
